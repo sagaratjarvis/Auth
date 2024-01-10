@@ -1,0 +1,40 @@
+import React, { useState } from "react";
+import Home from "./components/Home";
+// import BarChart from "./components/BarChart";
+import { userData } from "./Data";
+
+function App() {
+  const [userDataState, setUserData] = useState({
+    labels: userData.map((data) => data.year),
+    datasets: [
+      {
+        label: "User Gained (Bar)",
+        data: userData.map((data) => data.userGained),
+        backgroundColor: ["green", "red", "yellow"],
+        hoverBackgroundColor: ["lightgreen", "lightcoral", "lightyellow"],
+      },
+      {
+        label: "User Gained (Line)",
+        type: "line",
+        data: userData.map((data) => data.userGained),
+        borderColor: "black",
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        yAxisID: "y-axis-1", 
+        borderWidth:2,
+        order:-1
+      },
+    ],
+  });
+
+  return (
+    <>
+      <h1>Charts and Graphs</h1>
+      <div style={{ width: "700px" }}>
+        <Home chartData={userDataState} />
+        {/* <BarChart chartData={userDataState} /> */}
+      </div>
+    </>
+  );
+}
+
+export default App;
